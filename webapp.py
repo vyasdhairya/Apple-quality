@@ -3,7 +3,7 @@ import re
 import sqlite3 
 import pickle
 import pandas as pd
-
+import bz2
 
 conn = sqlite3.connect('data.db')
 c = conn.cursor()
@@ -101,7 +101,8 @@ if choice=="Login":
                               Juiciness, Ripeness, Acidity]
                     
                     b2=st.button("Predict")
-                    model=pickle.load(open("model.pkl",'rb'))
+                    sfile = bz2.BZ2File('model.pkl', 'rb')
+                    model=pickle.load(sfile)
                                            
                     if b2:                        
                         df = pd.DataFrame([my_array], 
